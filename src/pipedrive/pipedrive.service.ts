@@ -2,7 +2,6 @@ import { HttpService, Injectable, Logger } from '@nestjs/common';
 
 @Injectable()
 export class PipedriveService {
-  apiKey: string;
   logger = new Logger(PipedriveService.name);
   endpoint = '/deals';
 
