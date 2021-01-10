@@ -14,10 +14,9 @@ export class BlingService {
   async postOrder(order: PedidoBling) {
     const endpoint = '/pedido/json/"';
     const xml = this.parser.parse(order);
-    const response = await this.httpService
+    await this.httpService
       .post(endpoint, undefined, { params: { xml } })
       .toPromise();
-    return response.data;
   }
 
   async listProducts() {
