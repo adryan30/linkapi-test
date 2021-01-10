@@ -1,21 +1,14 @@
-export interface PipedriveResponse {
+interface PipedriveResponse {
   success: boolean;
+  additional_data: AdditionalData;
+}
+
+export interface DealsResponse extends PipedriveResponse {
   data: Deals[];
-  additional_data: {
-    pagination: {
-      start: number;
-      limit: number;
-      more_items_in_collection: boolean;
-    };
-  };
-  related_objects: {
-    user: {
-      [id: string]: CreatorUserID;
-    };
-    person: {
-      [id: string]: PersonID;
-    };
-  };
+  related_objects: RelatedObjects;
+}
+export interface DealProductsResponse extends PipedriveResponse {
+  data: DealProducts[];
 }
 
 export interface Deals {
@@ -78,6 +71,40 @@ export interface Deals {
   person_hidden: boolean;
 }
 
+export interface DealProducts {
+  id: number;
+  deal_id: number;
+  order_nr: number;
+  product_id: number;
+  product_variation_id: number;
+  item_price: number;
+  discount_percentage: number;
+  duration: number;
+  duration_unit: string;
+  sum_no_discount: number;
+  sum: number;
+  currency: string;
+  enabled_flag: boolean;
+  add_time: Date;
+  last_edit: null;
+  comments: null;
+  active_flag: boolean;
+  tax: number;
+  name: string;
+  sum_formatted: string;
+  quantity_formatted: string;
+  quantity: number;
+}
+
+export interface RelatedObjects {
+  user: {
+    [id: string]: CreatorUserID;
+  };
+  person: {
+    [id: string]: PersonID;
+  };
+}
+
 export interface CreatorUserID {
   id: number;
   name: string;
@@ -100,4 +127,19 @@ export interface PersonID {
 export interface Contact {
   value: string;
   primary: boolean;
+}
+
+export interface AdditionalData {
+  products_quantity_total?: number;
+  products_sum_total?: number;
+  variations_enabled?: boolean;
+  products_quantity_total_formatted?: string;
+  products_sum_total_formatted?: string;
+  pagination: Pagination;
+}
+
+export interface Pagination {
+  start: number;
+  limit: number;
+  more_items_in_collection: boolean;
 }

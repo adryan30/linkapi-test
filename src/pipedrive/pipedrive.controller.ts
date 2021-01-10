@@ -11,7 +11,7 @@ export class PipedriveController {
   }
 
   @Get(':deal')
-  getDealProducts(@Param('deal') deal: string) {
+  getDealProducts(@Param('deal') deal: number) {
     return this.pipedriveService.getDealProducts(deal);
   }
 }
