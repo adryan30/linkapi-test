@@ -3,6 +3,9 @@ import { Document } from 'mongoose';
 
 export type SyncDocument = Sync & Document;
 
+/**
+ * Schema para o armazenamento de registros de sincronização no MongoDB
+ */
 @Schema()
 export class Sync {
   @Prop()

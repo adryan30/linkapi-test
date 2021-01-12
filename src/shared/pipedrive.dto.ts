@@ -1,17 +1,22 @@
-interface PipedriveResponse {
+/** Resposta base da API do Pipedrive */
+class PipedriveResponse {
   success: boolean;
   additional_data: AdditionalData;
 }
 
-export interface DealsResponse extends PipedriveResponse {
+/** Resposta específica para o endpoint de "Negócios" */
+export class DealsResponse extends PipedriveResponse {
   data: Deals[];
   related_objects: RelatedObjects;
 }
-export interface DealProductsResponse extends PipedriveResponse {
+
+/** Resposta Específica para o endpoint de "Produtos de Negócios" */
+export class DealProductsResponse extends PipedriveResponse {
   data: DealProducts[];
 }
 
-export interface Deals {
+/** Objecto representando o "negócio" do Pipedrive */
+export class Deals {
   id: number;
   creator_user_id: CreatorUserID;
   user_id: CreatorUserID;
@@ -39,7 +44,7 @@ export interface Deals {
   pipeline_id: number;
   won_time: string;
   first_won_time: string;
-  lost_time: null;
+  lost_time: string;
   products_count: number;
   files_count: number;
   notes_count: number;
@@ -64,14 +69,25 @@ export interface Deals {
   weighted_value: number;
   formatted_weighted_value: string;
   weighted_value_currency: string;
-  rotten_time: null;
+  rotten_time: string;
   owner_name: string;
   cc_email: string;
   org_hidden: boolean;
   person_hidden: boolean;
 }
 
-export interface DealProducts {
+/** Classe para representar objetos relacionados com o négocio */
+export class RelatedObjects {
+  user: {
+    [id: string]: CreatorUserID;
+  };
+  person: {
+    [id: string]: PersonID;
+  };
+}
+
+/** Objeto que representa os produtos registrados no "negócio" do Pipedrive */
+export class DealProducts {
   id: number;
   deal_id: number;
   order_nr: number;
@@ -86,8 +102,8 @@ export interface DealProducts {
   currency: string;
   enabled_flag: boolean;
   add_time: string;
-  last_edit: null;
-  comments: null;
+  last_edit: string;
+  comments: string;
   active_flag: boolean;
   tax: number;
   name: string;
@@ -96,16 +112,8 @@ export interface DealProducts {
   quantity: number;
 }
 
-export interface RelatedObjects {
-  user: {
-    [id: string]: CreatorUserID;
-  };
-  person: {
-    [id: string]: PersonID;
-  };
-}
-
-export interface CreatorUserID {
+/** Objeto para a representação do criador de um negócio */
+export class CreatorUserID {
   id: number;
   name: string;
   email: string;
@@ -115,7 +123,8 @@ export interface CreatorUserID {
   value?: number;
 }
 
-export interface PersonID {
+/** Informações do cliente do Pipedrive */
+export class PersonID {
   active_flag: boolean;
   name: string;
   email: Contact[];
@@ -124,12 +133,14 @@ export interface PersonID {
   id?: number;
 }
 
-export interface Contact {
+/** Objeto para representar informações de contato */
+export class Contact {
   value: string;
   primary: boolean;
 }
 
-export interface AdditionalData {
+/** Objeto para informações adicionais de requisições como Paginação */
+export class AdditionalData {
   products_quantity_total?: number;
   products_sum_total?: number;
   variations_enabled?: boolean;
@@ -138,7 +149,8 @@ export interface AdditionalData {
   pagination: Pagination;
 }
 
-export interface Pagination {
+/** Objeto de paginação da API Pipedrive */
+export class Pagination {
   start: number;
   limit: number;
   more_items_in_collection: boolean;
