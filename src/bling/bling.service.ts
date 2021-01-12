@@ -18,10 +18,4 @@ export class BlingService {
       .post(endpoint, undefined, { params: { xml } })
       .toPromise();
   }
-
-  async listProducts() {
-    const endpoint = '/produtos';
-    const response = await this.httpService.get(endpoint).toPromise();
-    return xml.parse(response.data);
-  }
 }

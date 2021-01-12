@@ -8,7 +8,7 @@ import { BlingService } from './bling.service';
     HttpModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        baseURL: configService.get<string>('BLING_API'),
+        baseURL: 'https://bling.com.br/Api/v2',
         params: {
           apikey: configService.get<string>('BLING_API_KEY'),
         },

@@ -8,9 +8,7 @@ import { PipedriveService } from './pipedrive.service';
     HttpModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        baseURL: `https://${configService.get(
-          'PIPEDRIVE_DOMAIN',
-        )}.pipedrive.com/api/v1/`,
+        baseURL: `https://${configService.get('PIPEDRIVE_DOMAIN')}.pipedrive.com/api/v1/`,
         params: {
           api_token: configService.get<string>('PIPEDRIVE_API_KEY'),
         },
