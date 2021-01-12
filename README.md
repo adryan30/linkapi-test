@@ -6,8 +6,6 @@
 
 </div>
 
----
-
 ## Table of Contents <!-- omit in toc -->
 
 - [Built with:](#built-with)
